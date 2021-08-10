@@ -1,0 +1,93 @@
+npm init --s
+npm install redux 
+
+Redux:
+    "Redux is a predictable state container for javascript apps"
+        -redux is for javascript applications
+            -redux is not tied to react.
+            -it can be used with react,angular , vue or even vanilla javascript
+            -redux is a library for javascript applications
+        -redux is a state container
+            -redux stores the state of your applications
+            -redux will store and manage the application state
+        -redux is predictable
+            -Manage the state of your application in a predictable way,redux can help you.
+
+React-Redux:
+    -React-Redux is the official Redux UI binding library for React
+        React-------(React-Redux)-------Redux
+Summary:-
+    -raect is a library used to build user interfaces
+    -redux is a library for managing state in a predictable way in javascript applications
+    -react-redux is a library that provides bindings to use react and redux together in an application
+
+Core Concepts in Redux:
+    Action:-
+        It describes the changes in the state of the application
+            -Plain javascript objects
+            -it containes the object of information
+            -it must have type property that indicates the type of action being performed
+            -the type property is typically defines string constant
+            -the only way your application interact with the store
+            -Carry some information from your app to the redux store
+            -action tells the reducer what to do.
+    Dispacher:-
+        It takes the information or state and send to the reducer.it also called as postman
+    Reducer:-
+        Which actually carries out the state transition depending on the Action
+            -it takes the current state and return new state, then send to the store
+            -reducer tells the store, how to do.
+            (previouseState, action) => newState
+    Redux Store:-
+        only one store for the entire application
+            responsibilities:
+                -it holds the state of your application
+                -Allows access to state via getState()
+                -Allows state to be updated via dispatch(action)
+                -registers listners via subscribe(listner)
+Principles:
+    1)."the state of your whole application is stored in an object tree within a single store"
+        -all of your state stored in single object
+            ex: {
+                 numberOfCakes:10
+                }
+    2)."the only way to change the state is to an action, an object describing what happened"
+        -To update the state of your app, you need to let redux know about that with an action 
+        not allowed to directly update the state object
+        ex: {
+            type: BUY_CAKE
+            }
+    3)."To specify how the state tree is transformed by actions, you write pure reducers"
+         Reducer-(previouseState, action) => newState
+         ex:
+            const reducer = (state, action) => {
+                switch(action.type) {
+                    case BUY_CAKE: return {
+                        numOfCakes: state.numOfCakes - 1
+                    }
+                }
+            }
+                    subscribed
+                         ----(javascript app)-----
+                        |                          |dispatch
+                        |                          |
+                    (redux store)               (Action)
+                        |                          |
+                        |                          |
+                         -------(reducer)----------
+
+Middleware:
+    -Is the suggested way to extend Redux with custom functionality
+    -Provides a third-party extension point between dispatching an action, and the momment it reaches the reducer
+    -Use middleware for logging, crash reporting, performing asynchronous tasks etc
+            -npm install redux-logger
+
+Async action creators:
+    axios:
+        -request to an API end point
+    redux-thunk:
+        -standerd way to define async action creators
+        -it is a middle ware
+    For these ---we have to install two packeges
+        -npm install axios redux-thunk
+
